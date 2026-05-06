@@ -2,11 +2,11 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vp build",
-        "build:ssr": "vp build && vp build --ssr",
-        "dev": "vp dev",
-        "lint": "NODE_OPTIONS='--experimental-strip-types' vp fmt resources/ && NODE_OPTIONS='--experimental-strip-types' vp lint --fix",
-        "test:lint": "NODE_OPTIONS='--experimental-strip-types' vp fmt --check resources/ && NODE_OPTIONS='--experimental-strip-types' vp lint",
+        "build": "vite build",
+        "build:ssr": "vite build && vite build --ssr",
+        "dev": "vite",
+        "lint": "NODE_OPTIONS='--experimental-strip-types' vite lint resources/ && NODE_OPTIONS='--experimental-strip-types' vite lint --fix",
+        "test:lint": "NODE_OPTIONS='--experimental-strip-types' vite lint --check resources/ && NODE_OPTIONS='--experimental-strip-types' vite lint",
         "test:types": "tsc --noEmit"
     },
     "devDependencies": {
@@ -18,8 +18,7 @@
         "npm-check-updates": "^22.1.0",
         "playwright": "^1.59.1",
         "typescript": "^6.0.3",
-        "vite": "npm:@voidzero-dev/vite-plus-core@latest",
-        "vite-plus": "latest",
+        "vite": "^8.0.1",
         "vue-tsc": "^3.2.7"
     },
     "dependencies": {
