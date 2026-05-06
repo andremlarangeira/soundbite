@@ -1,0 +1,2 @@
+SoundBite é um jogo web single-player de adivinhação musical. O jogador informa a URL de uma playlist pública do YouTube, e o sistema extrai as músicas disponíveis. Em cada rodada, o sistema seleciona uma música aleatória e toca 1 segundo de um trecho aleatório dela. O jogador tenta adivinhar o título. Se errar ou não souber, pode pedir mais 1 segundo (repetindo até o player desistir ou acertar). A pontuação começa alta e diminui a cada segundo extra solicitado. Ao final de cada rodada, uma animação exibe se acertou ou errou, junto com a pontuação obtida.
+
