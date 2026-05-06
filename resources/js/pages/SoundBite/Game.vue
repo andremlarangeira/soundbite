@@ -1,28 +1,28 @@
 <template>
-    <div class="min-h-screen flex flex-col items-center py-10 px-4 relative overflow-hidden" style="background-color: var(--bg-base); color: var(--text-primary); font-family: var(--font-body)">
+    <div class="min-h-screen flex flex-col items-center py-4 md:py-10 px-3 md:px-4 relative overflow-hidden" style="background-color: var(--bg-base); color: var(--text-primary); font-family: var(--font-body)">
         <!-- Particles -->
         <div class="absolute inset-0 pointer-events-none opacity-20 particle-bg"></div>
 
-        <div class="z-10 w-full max-w-2xl flex flex-col gap-8">
+        <div class="z-10 w-full max-w-2xl flex flex-col gap-3 md:gap-8">
             <!-- Header -->
-            <header class="flex justify-between items-center bg-surface p-6 rounded-2xl border border-elevated" style="background-color: var(--bg-surface); border-color: var(--bg-elevated)">
+            <header class="flex justify-between items-center bg-surface p-3 md:p-6 rounded-xl md:rounded-2xl border border-elevated" style="background-color: var(--bg-surface); border-color: var(--bg-elevated)">
                 <div class="flex flex-col">
-                    <span class="text-sm uppercase tracking-widest text-muted" style="color: var(--text-muted)">Rodada</span>
-                    <span class="text-3xl font-bold" style="font-family: var(--font-display); color: var(--accent-secondary)">{{ roundNumber }} / {{ totalSongs }}</span>
+                    <span class="text-xs md:text-sm uppercase tracking-widest text-muted" style="color: var(--text-muted)">Rodada</span>
+                    <span class="text-xl md:text-3xl font-bold" style="font-family: var(--font-display); color: var(--accent-secondary)">{{ roundNumber }} / {{ totalSongs }}</span>
                 </div>
-                <div class="flex gap-6 items-center">
+                <div class="flex gap-4 md:gap-6 items-center">
                     <!-- <Link href="/game/create-playlist" class="text-xs uppercase font-bold tracking-widest hover:text-white transition-colors hidden md:block" style="color: var(--accent-primary)">+ Criar Playlist</Link> -->
                     <div class="flex flex-col items-end">
-                        <span class="text-sm uppercase tracking-widest text-muted" style="color: var(--text-muted)">Pontuação</span>
-                        <span class="text-4xl font-extrabold score-display" style="font-family: var(--font-display); color: var(--accent-gold)">{{ displayScore }}</span>
+                        <span class="text-xs md:text-sm uppercase tracking-widest text-muted" style="color: var(--text-muted)">Pontuação</span>
+                        <span class="text-2xl md:text-4xl font-extrabold score-display" style="font-family: var(--font-display); color: var(--accent-gold)">{{ displayScore }}</span>
                     </div>
                 </div>
             </header>
 
             <!-- Visualizer & Timer -->
-            <div class="flex flex-col items-center gap-4 py-8">
+            <div class="flex flex-col items-center gap-2 md:gap-4 py-3 md:py-8">
                 <!-- Waveform Bars -->
-                <div class="flex gap-1 md:gap-2 h-32 items-end justify-center w-full">
+                <div class="flex gap-1 md:gap-2 h-16 md:h-32 items-end justify-center w-full">
                     <div
                         v-for="i in numBars"
                         :key="i"
@@ -35,7 +35,7 @@
                 </div>
 
                 <!-- Timer Bar -->
-                <div class="w-full h-3 rounded-full bg-elevated overflow-hidden mt-4 relative" style="background-color: var(--bg-elevated)">
+                <div class="w-full h-2 md:h-3 rounded-full bg-elevated overflow-hidden mt-2 md:mt-4 relative" style="background-color: var(--bg-elevated)">
                     <div
                         class="h-full transition-all duration-[1000ms] ease-linear"
                         :style="{
@@ -44,16 +44,16 @@
                         }"
                     ></div>
                 </div>
-                <div class="text-sm text-muted" style="color: var(--text-muted)">
-                    Ouvindo: {{ secondsRevealed }}s (Penalidade: -{{ (secondsRevealed - 1) * 100 }} pts)
+                <div class="text-xs md:text-sm text-muted" style="color: var(--text-muted)">
+                    Ouvindo: {{ secondsRevealed }}s (-{{ (secondsRevealed - 1) * 100 }} pts)
                 </div>
-                <div class="text-sm font-bold mt-2" style="color: var(--accent-gold)">
-                    ⏱️ Tempo Real: {{ elapsedSeconds }}s (Penalidade: -{{ elapsedSeconds * 5 }} pts)
+                <div class="text-xs md:text-sm font-bold mt-1 md:mt-2" style="color: var(--accent-gold)">
+                    ⏱️ {{ elapsedSeconds }}s (-{{ elapsedSeconds * 5 }} pts)
                 </div>
             </div>
 
             <!-- Controls -->
-            <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-3 md:gap-4">
                 <div class="relative w-full">
                     <input
                         v-model="guessInput"
@@ -62,7 +62,7 @@
                         @keyup.enter="submitGuess"
                         type="text"
                         placeholder="Qual é a música?"
-                        class="w-full px-6 py-5 rounded-2xl text-xl outline-none transition-all duration-300 border-2 border-transparent text-white"
+                        class="w-full px-4 py-3 md:px-6 md:py-5 rounded-xl md:rounded-2xl text-base md:text-xl outline-none transition-all duration-300 border-2 border-transparent text-white"
                         style="background-color: var(--bg-surface); box-shadow: inset 0 0 0 2px var(--bg-elevated);"
                         :class="{'input-glow': showAutocomplete && autocompleteEnabled}"
                     />
@@ -87,52 +87,52 @@
                 </div>
 
                 <!-- Help Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full mt-2">
+                <div class="grid grid-cols-3 gap-2 md:gap-4 w-full mt-1 md:mt-2">
                     <button
                         @click="addSecond"
                         :disabled="secondsRevealed >= 10 || isPlaying || loading"
-                        class="flex flex-col items-center justify-center p-4 rounded-2xl transition-all duration-200 hover:-translate-y-1 hover:shadow-lg disabled:opacity-50 disabled:hover:translate-y-0"
+                        class="flex flex-col items-center justify-center p-2 md:p-4 rounded-xl md:rounded-2xl transition-all duration-200 hover:-translate-y-1 hover:shadow-lg disabled:opacity-50 disabled:hover:translate-y-0"
                         style="background-color: var(--bg-surface); border: 1px solid var(--bg-elevated);"
                     >
-                        <span class="text-3xl mb-2">🎵</span>
-                        <span class="font-bold text-sm uppercase tracking-wider" style="color: var(--accent-secondary); font-family: var(--font-display)">+1 Segundo</span>
-                        <span class="text-xs text-muted mt-1" style="color: var(--text-muted)">Penalidade: -100 pts</span>
+                        <span class="text-lg md:text-3xl mb-0.5 md:mb-2">🎵</span>
+                        <span class="font-bold text-[10px] md:text-sm uppercase tracking-wider leading-tight text-center" style="color: var(--accent-secondary); font-family: var(--font-display)">+1 Seg</span>
+                        <span class="text-[9px] md:text-xs text-muted mt-0.5 md:mt-1 hidden md:block" style="color: var(--text-muted)">-100 pts</span>
                     </button>
 
                     <button
                         @click="playAudioSnippet"
                         :disabled="isPlaying || loading"
-                        class="flex flex-col items-center justify-center p-4 rounded-2xl transition-all duration-200 hover:-translate-y-1 hover:shadow-lg disabled:opacity-50 disabled:hover:translate-y-0"
+                        class="flex flex-col items-center justify-center p-2 md:p-4 rounded-xl md:rounded-2xl transition-all duration-200 hover:-translate-y-1 hover:shadow-lg disabled:opacity-50 disabled:hover:translate-y-0"
                         style="background-color: var(--bg-surface); border: 1px solid var(--bg-elevated);"
                     >
-                        <span class="text-3xl mb-2">🔁</span>
-                        <span class="font-bold text-sm uppercase tracking-wider" style="color: var(--text-primary); font-family: var(--font-display)">Ouvir Novamente</span>
-                        <span class="text-xs text-muted mt-1" style="color: var(--text-muted)">Sem custo adicional</span>
+                        <span class="text-lg md:text-3xl mb-0.5 md:mb-2">🔁</span>
+                        <span class="font-bold text-[10px] md:text-sm uppercase tracking-wider leading-tight text-center" style="color: var(--text-primary); font-family: var(--font-display)">Replay</span>
+                        <span class="text-[9px] md:text-xs text-muted mt-0.5 md:mt-1 hidden md:block" style="color: var(--text-muted)">Grátis</span>
                     </button>
 
                     <button
                         @click="buyAutocomplete"
                         :disabled="autocompleteEnabled || loading"
-                        class="flex flex-col items-center justify-center p-4 rounded-2xl transition-all duration-200 hover:-translate-y-1 hover:shadow-lg disabled:opacity-50 disabled:hover:translate-y-0 relative overflow-hidden"
+                        class="flex flex-col items-center justify-center p-2 md:p-4 rounded-xl md:rounded-2xl transition-all duration-200 hover:-translate-y-1 hover:shadow-lg disabled:opacity-50 disabled:hover:translate-y-0 relative overflow-hidden"
                         :style="{
                             backgroundColor: autocompleteEnabled ? 'var(--bg-elevated)' : 'var(--bg-surface)',
                             border: autocompleteEnabled ? '1px solid transparent' : '1px solid var(--accent-primary)'
                         }"
                     >
-                        <span class="text-3xl mb-2">💡</span>
-                        <span class="font-bold text-sm uppercase tracking-wider" :style="{ color: autocompleteEnabled ? 'var(--text-muted)' : 'var(--accent-primary)' }" style="font-family: var(--font-display)">
-                            {{ autocompleteEnabled ? 'Autocompletar Ativo' : 'Autocompletar' }}
+                        <span class="text-lg md:text-3xl mb-0.5 md:mb-2">💡</span>
+                        <span class="font-bold text-[10px] md:text-sm uppercase tracking-wider leading-tight text-center" :style="{ color: autocompleteEnabled ? 'var(--text-muted)' : 'var(--accent-primary)' }" style="font-family: var(--font-display)">
+                            {{ autocompleteEnabled ? 'Ativo' : 'Auto' }}
                         </span>
-                        <span class="text-xs text-muted mt-1" style="color: var(--text-muted)" v-if="!autocompleteEnabled">Custo: -200 pts</span>
+                        <span class="text-[9px] md:text-xs text-muted mt-0.5 md:mt-1 hidden md:block" style="color: var(--text-muted)" v-if="!autocompleteEnabled">-200 pts</span>
                     </button>
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="flex gap-4 w-full mt-4 flex-col md:flex-row">
+                <div class="flex gap-2 md:gap-4 w-full mt-2 md:mt-4 flex-row">
                     <button
                         @click="submitGuess"
                         :disabled="!guessInput || isPlaying || loading"
-                        class="flex-1 py-5 rounded-2xl font-black text-xl uppercase tracking-wider transition-all duration-200 hover:scale-[0.98] active:scale-95 disabled:opacity-50 shadow-[0_0_20px_rgba(34,197,94,0.2)]"
+                        class="flex-1 py-3 md:py-5 rounded-xl md:rounded-2xl font-black text-sm md:text-xl uppercase tracking-wider transition-all duration-200 hover:scale-[0.98] active:scale-95 disabled:opacity-50 shadow-[0_0_20px_rgba(34,197,94,0.2)]"
                         style="background-color: var(--accent-success); color: #09090f; font-family: var(--font-display)"
                     >
                         ✓ Confirmar
@@ -140,7 +140,7 @@
                     <button
                         @click="skipRound"
                         :disabled="isPlaying || loading"
-                        class="flex-1 py-5 rounded-2xl font-bold text-lg uppercase tracking-wider transition-all duration-200 hover:scale-[0.98] active:scale-95 disabled:opacity-50"
+                        class="flex-1 py-3 md:py-5 rounded-xl md:rounded-2xl font-bold text-sm md:text-lg uppercase tracking-wider transition-all duration-200 hover:scale-[0.98] active:scale-95 disabled:opacity-50"
                         style="background-color: transparent; color: var(--accent-error); border: 2px solid var(--accent-error); font-family: var(--font-display)"
                     >
                         ✗ Passar

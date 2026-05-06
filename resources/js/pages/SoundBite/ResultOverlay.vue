@@ -19,8 +19,9 @@
                 {{ result.correct ? 'Acertou! 🎉' : 'Errou...' }}
             </h2>
 
-            <div v-if="!result.correct && result.song" class="text-lg mb-6" style="color: var(--text-muted)">
-                Era: <strong style="color: var(--text-primary)">{{ result.song.title }}</strong>
+            <div v-if="result.song" class="text-lg mb-4" style="color: var(--text-muted)">
+                <template v-if="result.correct">🎶 <strong style="color: var(--text-primary)">{{ result.song.title }}</strong></template>
+                <template v-else>Era: <strong style="color: var(--text-primary)">{{ result.song.title }}</strong></template>
             </div>
 
             <div v-if="result.song" class="relative w-full aspect-video rounded-xl overflow-hidden mb-6 shadow-lg">
