@@ -84,6 +84,12 @@ Route::middleware('guest')->group(function (): void {
         ->name('login');
     Route::post('login', [SessionController::class, 'store'])
         ->name('login.store');
+
+    // Google Socialite...
+    Route::get('auth/google/redirect', [App\Http\Controllers\Auth\GoogleController::class, 'redirect'])
+        ->name('google.redirect');
+    Route::get('auth/google/callback', [App\Http\Controllers\Auth\GoogleController::class, 'callback'])
+        ->name('google.callback');
 });
 
 Route::middleware('auth')->group(function (): void {
